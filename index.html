@@ -1,4 +1,5 @@
-<!-- ... existing code ... -->
+<!DOCTYPE html>
+<html lang="id">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
@@ -13,22 +14,19 @@
     @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap');
     body { font-family: 'Plus Jakarta Sans', sans-serif; }
 
-    /* Proteksi saat siswa aktif ujian */
+    /* Proteksi seleksi teks saat siswa aktif ujian */
     .exam-mode {
       -webkit-touch-callout: none;
       -webkit-user-select: none;
       user-select: none;
     }
 
-    input, textarea, select, button, a {
+    input, textarea, select {
       -webkit-user-select: text !important;
       user-select: text !important;
     }
-    button, a {
-      user-select: none !important;
-    }
 
-    /* Gen Alpha Mesh Gradient & Glow Effects */
+    /* Mesh Gradient & Glow Effects */
     .bg-gen-alpha {
       background: radial-gradient(circle at 10% 15%, rgba(168, 85, 247, 0.18) 0%, transparent 40%),
                   radial-gradient(circle at 85% 20%, rgba(59, 130, 246, 0.22) 0%, transparent 45%),
@@ -37,10 +35,10 @@
     }
 
     .glass-card {
-      background: rgba(255, 255, 255, 0.92);
+      background: rgba(255, 255, 255, 0.95);
       backdrop-filter: blur(16px);
       -webkit-backdrop-filter: blur(16px);
-      border: 1px solid rgba(255, 255, 255, 0.6);
+      border: 1px solid rgba(255, 255, 255, 0.7);
       box-shadow: 0 20px 40px -15px rgba(99, 102, 241, 0.22);
     }
 
@@ -73,7 +71,7 @@
     /* Cetak Lembar A4 Standar Presisi */
     @page {
       size: A4 portrait;
-      margin: 8mm 6mm;
+      margin: 6mm 5mm;
     }
 
     .page-break-a4 {
@@ -84,8 +82,29 @@
     /* Dimensi E-KTP Standar Indonesia (ID-1: 85.60 mm x 53.98 mm) */
     .ektp-card {
       width: 85.6mm;
-      height: 53.98mm;
+      height: 52.5mm;
+      max-height: 52.5mm;
       box-sizing: border-box;
+      overflow: hidden;
+    }
+
+    /* Grid layout 10 kartu dalam layar dan cetak */
+    .a4-print-sheet-kartu {
+      display: grid;
+      grid-template-columns: repeat(2, 85.6mm);
+      justify-content: center;
+      gap: 3mm 4mm;
+      width: 100%;
+      box-sizing: border-box;
+      margin: 0 auto;
+    }
+
+    /* Layout Denah Pas 1 Lembar A4 */
+    .a4-print-sheet-denah {
+      width: 100%;
+      max-height: 275mm;
+      box-sizing: border-box;
+      page-break-inside: avoid;
     }
 
     @media print {
@@ -105,11 +124,11 @@
       .a4-print-sheet-kartu {
         display: grid !important;
         grid-template-columns: repeat(2, 85.6mm) !important;
-        grid-template-rows: repeat(5, 53.98mm) !important;
+        grid-template-rows: repeat(5, 52.5mm) !important;
         justify-content: center !important;
-        gap: 2.5mm !important;
-        width: 198mm !important;
-        height: 281mm !important;
+        gap: 2mm 3mm !important;
+        width: 190mm !important;
+        height: 275mm !important;
         box-sizing: border-box !important;
         page-break-inside: avoid !important;
         page-break-after: always !important;
@@ -120,12 +139,13 @@
 
       .a4-print-sheet-denah {
         page-break-inside: avoid !important;
-        page-break-after: always !important;
-        break-after: page !important;
+        page-break-after: avoid !important;
+        break-after: avoid !important;
         width: 100% !important;
-        height: 275mm !important;
+        height: 272mm !important;
         box-sizing: border-box !important;
-        padding: 2mm 0 !important;
+        padding: 2mm !important;
+        margin: 0 auto !important;
       }
     }
   </style>
@@ -182,17 +202,17 @@
     </div>
   </div>
 
-  <!-- 1. LAYAR LOGIN UTAMA (GEN ALPHA VIBE: ELECTRIC VIOLET, NEON PINK, GLOWING GLASS) -->
+  <!-- 1. LAYAR LOGIN UTAMA -->
   <div id="login-screen" class="min-h-screen bg-gen-alpha flex items-center justify-center p-4 relative overflow-hidden">
     
-    <!-- Ornamen Neon Blur Background -->
+    <!-- Ornamen Neon Background -->
     <div class="absolute -top-24 -left-24 w-80 h-80 bg-purple-600/30 rounded-full blur-[100px] pointer-events-none"></div>
     <div class="absolute -bottom-24 -right-24 w-80 h-80 bg-pink-600/25 rounded-full blur-[100px] pointer-events-none"></div>
     <div class="absolute top-1/2 left-1/4 w-60 h-60 bg-cyan-500/20 rounded-full blur-[90px] pointer-events-none"></div>
 
-    <div class="w-full max-w-[400px] glass-card rounded-[32px] overflow-hidden shadow-[0_25px_60px_-15px_rgba(147,51,234,0.35)] border border-white/80 relative z-10 transition-all duration-300">
+    <div class="w-full max-w-[420px] glass-card rounded-[32px] overflow-hidden shadow-[0_25px_60px_-15px_rgba(147,51,234,0.35)] border border-white/80 relative z-10 transition-all duration-300">
       
-      <!-- Header Gradient Energetic Gen Alpha -->
+      <!-- Header Gradient -->
       <div class="bg-gradient-to-br from-indigo-600 via-purple-600 to-pink-500 pt-8 pb-7 px-5 text-center text-white relative overflow-hidden">
         <div class="absolute -right-6 -bottom-6 w-24 h-24 bg-white/10 rounded-full blur-xl pointer-events-none"></div>
         <div class="inline-flex w-14 h-14 bg-white/95 rounded-2xl items-center justify-center mb-3 shadow-[0_8px_20px_rgba(0,0,0,0.15)] ring-4 ring-white/30 transform hover:scale-105 transition">
@@ -202,11 +222,11 @@
           CBT MTsN LANDAK <span class="text-xs bg-yellow-400 text-slate-900 font-black px-2 py-0.5 rounded-full shadow-sm">PRO</span>
         </h1>
         <p class="text-[11px] text-pink-100 font-semibold tracking-wide mt-1 flex items-center justify-center gap-1.5">
-          <span class="inline-block w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span> Anti-Curang & Anti-AI Shield
+          <span class="inline-block w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span> Sistem Ujian & Penataan Ruang Otomatis
         </p>
       </div>
 
-      <!-- Tab Switcher Role Pill Mode -->
+      <!-- Tab Switcher Role -->
       <div class="p-2 bg-slate-100/90 border-b border-slate-200 flex gap-1.5">
         <button type="button" id="tab-btn-siswa" onclick="switchLoginRole('siswa')" class="flex-1 py-2.5 text-xs font-extrabold rounded-2xl bg-white text-purple-700 shadow-sm flex items-center justify-center gap-1.5 transition-all">
           <i class="fa-solid fa-gamepad text-xs text-purple-600"></i> LOGIN SISWA
@@ -226,7 +246,7 @@
             <span class="absolute inset-y-0 left-0 pl-3.5 flex items-center text-slate-400 text-xs">
               <i class="fa-solid fa-id-badge text-purple-500 text-sm"></i>
             </span>
-            <input type="text" id="login-siswa-nisn" required placeholder="Contoh: 0091234501" class="w-full pl-10 pr-4 py-2.5 text-xs rounded-2xl border-2 border-slate-200 bg-white/80 focus:bg-white focus:outline-none focus:border-purple-500 text-slate-800 font-bold placeholder-slate-400 shadow-inner transition">
+            <input type="text" id="login-siswa-nisn" required placeholder="Contoh: 0070000001" class="w-full pl-10 pr-4 py-2.5 text-xs rounded-2xl border-2 border-slate-200 bg-white/80 focus:bg-white focus:outline-none focus:border-purple-500 text-slate-800 font-bold placeholder-slate-400 shadow-inner transition">
           </div>
         </div>
 
@@ -238,16 +258,16 @@
             <span class="absolute inset-y-0 left-0 pl-3.5 flex items-center text-slate-400 text-xs">
               <i class="fa-solid fa-lock text-pink-500 text-xs"></i>
             </span>
-            <input type="password" id="login-siswa-pass" required placeholder="Masukkan 6 digit kode..." class="w-full pl-10 pr-10 py-2.5 text-xs rounded-2xl border-2 border-slate-200 bg-white/80 focus:bg-white focus:outline-none focus:border-pink-500 text-slate-800 font-bold placeholder-slate-400 shadow-inner transition">
+            <input type="password" id="login-siswa-pass" required placeholder="Masukkan password kartu..." class="w-full pl-10 pr-10 py-2.5 text-xs rounded-2xl border-2 border-slate-200 bg-white/80 focus:bg-white focus:outline-none focus:border-pink-500 text-slate-800 font-bold placeholder-slate-400 shadow-inner transition">
             <button type="button" onclick="togglePasswordVisibility('login-siswa-pass', this)" class="absolute inset-y-0 right-0 pr-3.5 flex items-center text-slate-400 hover:text-purple-600 text-xs">
               <i class="fa-regular fa-eye"></i>
             </button>
           </div>
-          <p class="text-[10px] text-slate-500 mt-1.5 font-medium">*Cek username & password di kartu ujian fisik Anda ya!</p>
+          <p class="text-[10px] text-slate-500 mt-1.5 font-medium">*NISN dan Password tertera pada kartu ujian fisik Anda.</p>
         </div>
 
         <button type="submit" class="w-full py-3 rounded-2xl glow-btn text-white font-black text-xs uppercase tracking-wider flex items-center justify-center gap-2">
-          <span>GAS MASUK UJIAN</span> <i class="fa-solid fa-arrow-right-long text-xs"></i>
+          <span>MASUK KE RUANG UJIAN</span> <i class="fa-solid fa-arrow-right-long text-xs"></i>
         </button>
 
         <div class="pt-1 text-center">
@@ -257,7 +277,7 @@
         </div>
       </form>
 
-      <!-- Form Operator -->
+      <!-- Form Operator (Input Default Dikosongkan) -->
       <form id="form-login-operator" onsubmit="handleLoginOperator(event)" class="p-6 space-y-4 hidden">
         <div>
           <label class="block text-xs font-extrabold text-slate-700 mb-1.5 flex items-center gap-1">
@@ -267,7 +287,7 @@
             <span class="absolute inset-y-0 left-0 pl-3.5 flex items-center text-slate-400 text-xs">
               <i class="fa-solid fa-user-shield text-cyan-500 text-xs"></i>
             </span>
-            <input type="text" id="login-op-user" value="admin" required placeholder="Username..." class="w-full pl-10 pr-4 py-2.5 text-xs rounded-2xl border-2 border-slate-200 bg-white/80 focus:bg-white focus:outline-none focus:border-cyan-500 text-slate-800 font-bold">
+            <input type="text" id="login-op-user" required placeholder="Masukkan username..." class="w-full pl-10 pr-4 py-2.5 text-xs rounded-2xl border-2 border-slate-200 bg-white/80 focus:bg-white focus:outline-none focus:border-cyan-500 text-slate-800 font-bold">
           </div>
         </div>
 
@@ -279,24 +299,31 @@
             <span class="absolute inset-y-0 left-0 pl-3.5 flex items-center text-slate-400 text-xs">
               <i class="fa-solid fa-lock text-cyan-500 text-xs"></i>
             </span>
-            <input type="password" id="login-op-pass" value="admin123" required placeholder="Password..." class="w-full pl-10 pr-10 py-2.5 text-xs rounded-2xl border-2 border-slate-200 bg-white/80 focus:bg-white focus:outline-none focus:border-cyan-500 text-slate-800 font-bold">
+            <input type="password" id="login-op-pass" required placeholder="Masukkan password..." class="w-full pl-10 pr-10 py-2.5 text-xs rounded-2xl border-2 border-slate-200 bg-white/80 focus:bg-white focus:outline-none focus:border-cyan-500 text-slate-800 font-bold">
             <button type="button" onclick="togglePasswordVisibility('login-op-pass', this)" class="absolute inset-y-0 right-0 pr-3.5 flex items-center text-slate-400 hover:text-cyan-600 text-xs">
               <i class="fa-regular fa-eye"></i>
             </button>
           </div>
+          <p class="text-[10px] text-slate-500 mt-1.5 font-medium">*Gunakan akun operator terdaftar untuk akses penuh.</p>
         </div>
 
         <button type="submit" class="w-full py-3 rounded-2xl glow-cyber text-white font-black text-xs uppercase tracking-wider transition shadow-lg flex items-center justify-center gap-2 hover:scale-[1.01] active:scale-[0.99]">
           <i class="fa-solid fa-terminal text-xs"></i> MASUK PANEL PROKTOR
         </button>
+
+        <div class="pt-1 text-center">
+          <button type="button" onclick="isiAkunDemoOperator()" class="text-[11px] font-extrabold text-cyan-700 hover:text-cyan-900 bg-cyan-50 hover:bg-cyan-100/80 px-3 py-1.5 rounded-full inline-flex items-center gap-1.5 transition">
+            <i class="fa-solid fa-key text-cyan-600"></i> Auto-Fill Akun Operator Default
+          </button>
+        </div>
       </form>
 
     </div>
   </div>
 
-  <!-- 2. PORTAL SISWA (VIBRANT & GAMIFIED) -->
+  <!-- 2. PORTAL SISWA -->
   <div id="portal-siswa" class="min-h-screen bg-[#0d1322] text-slate-100 hidden flex flex-col">
-    <!-- Header Siswa Modern -->
+    <!-- Header Siswa -->
     <header class="bg-slate-900/80 backdrop-blur-md border-b border-purple-500/20 px-4 md:px-6 py-3.5 shadow-lg flex justify-between items-center sticky top-0 z-30">
       <div class="flex items-center gap-3">
         <div class="w-10 h-10 rounded-2xl bg-gradient-to-tr from-purple-600 to-pink-500 flex items-center justify-center shadow-lg shadow-purple-500/30">
@@ -395,7 +422,7 @@
     </main>
   </div>
 
-  <!-- 3. PANEL OPERATOR (CYBER GLOW THEME) -->
+  <!-- 3. PANEL OPERATOR -->
   <div id="portal-operator" class="min-h-screen bg-[#080d1a] text-slate-100 hidden flex flex-col">
     <header class="bg-slate-900/90 backdrop-blur-md border-b border-cyan-500/20 sticky top-0 z-40 shadow-xl">
       <div class="max-w-7xl mx-auto px-4 md:px-6 py-3 flex justify-between items-center border-b border-slate-800/80">
@@ -434,10 +461,10 @@
           <i class="fa-solid fa-file-word"></i> Bank Soal
         </button>
         <button onclick="switchOpTab('kartu')" id="op-tab-kartu" class="px-3.5 py-2 rounded-2xl text-xs font-bold text-slate-300 hover:bg-slate-800 transition flex items-center gap-1.5">
-          <i class="fa-solid fa-id-card"></i> Kartu Ujian (E-KTP)
+          <i class="fa-solid fa-id-card"></i> Cetak Kartu (10/Lembar A4)
         </button>
         <button onclick="switchOpTab('denah')" id="op-tab-denah" class="px-3.5 py-2 rounded-2xl text-xs font-bold text-slate-300 hover:bg-slate-800 transition flex items-center gap-1.5">
-          <i class="fa-solid fa-chair"></i> Denah Duduk
+          <i class="fa-solid fa-chair"></i> Denah Duduk (Pas 1 A4)
         </button>
         <button onclick="switchOpTab('operator')" id="op-tab-operator" class="px-3.5 py-2 rounded-2xl text-xs font-bold text-slate-300 hover:bg-slate-800 transition flex items-center gap-1.5">
           <i class="fa-solid fa-user-gear"></i> Akun Proktor
@@ -586,7 +613,7 @@
         </div>
       </section>
 
-      <!-- VIEW CETAK KARTU E-KTP (10 KARTU PER LEMBAR A4) -->
+      <!-- VIEW CETAK KARTU (10 KARTU PER LEMBAR A4) -->
       <section id="view-kartu" class="space-y-6 hidden">
         <div class="glass-card-dark p-6 rounded-3xl border border-slate-800 no-print flex flex-col md:flex-row items-center justify-between gap-4 shadow-xl">
           <div class="flex flex-wrap items-center gap-3">
@@ -598,7 +625,7 @@
             </div>
             <div class="self-end pb-1">
               <span class="text-[11px] font-bold text-cyan-400 bg-cyan-950/60 border border-cyan-800 px-3 py-1.5 rounded-xl">
-                <i class="fa-solid fa-id-card mr-1"></i> Standar Ukuran E-KTP (85.6 × 53.98 mm) • Tepat 10 Kartu / Lembar A4
+                <i class="fa-solid fa-id-card mr-1"></i> Standar E-KTP • Tepat 10 Kartu per Lembar A4 (2 Kolom x 5 Baris)
               </span>
             </div>
           </div>
@@ -612,7 +639,7 @@
         </div>
       </section>
 
-      <!-- VIEW DENAH MEJA RUANGAN (SUSUNAN SILANG 7, 8, 9) -->
+      <!-- VIEW DENAH MEJA RUANGAN (PAS 1 LEMBAR A4 TANPA TERPOTONG) -->
       <section id="view-denah" class="space-y-6 hidden">
         <div class="glass-card-dark p-6 rounded-3xl border border-slate-800 no-print flex flex-col md:flex-row items-center justify-between gap-4 shadow-xl">
           <div class="flex flex-wrap items-center gap-3">
@@ -629,7 +656,7 @@
             </div>
             <div class="self-end pb-1">
               <span class="text-[11px] font-bold text-purple-300 bg-purple-950/60 border border-purple-800 px-3 py-1.5 rounded-xl">
-                <i class="fa-solid fa-table-cells mr-1"></i> 5 Meja per Baris (1 Meja = 2 Siswa Beda Kelas)
+                <i class="fa-solid fa-table-cells mr-1"></i> 5 Meja/Baris • Pas 1 Lembar A4 Tanpa Potong
               </span>
             </div>
           </div>
@@ -638,8 +665,8 @@
           </button>
         </div>
 
-        <div id="container-denah-ruangan" class="glass-card-dark p-6 rounded-3xl border border-slate-800 space-y-6 shadow-xl">
-          <!-- Diisi via Javascript (Muat 1 Lembar A4) -->
+        <div id="container-denah-ruangan" class="space-y-6">
+          <!-- Diisi via Javascript (Pas 1 Lembar A4) -->
         </div>
       </section>
 
@@ -694,8 +721,9 @@
 
     let masterSiswa = [];
 
+    /* AKUN OPERATOR: DEFAULT ASTROBOY / MusiMah@kam$$ */
     let operatorAccounts = [
-      { id: 1, nama: "H. Ahmad Fauzi", peran: "Proktor Utama", username: "admin", password: "admin123" },
+      { id: 1, nama: "Astroboy (Proktor Utama)", peran: "Proktor Utama", username: "Astroboy", password: "MusiMah@kam$$" },
       { id: 2, nama: "Siti Aminah, S.Pd", peran: "Proktor Ruang 1-8", username: "proktor2", password: "mtsnlandak2" },
       { id: 3, nama: "Budi Santoso, S.Kom", peran: "Proktor Ruang 9-15", username: "proktor3", password: "mtsnlandak3" }
     ];
@@ -760,7 +788,7 @@
         iconWrap.className = "w-10 h-10 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center text-lg font-bold";
         icon.className = "fa-solid fa-circle-check";
       } else {
-        iconWrap.className = "w-10 h-10 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center text-lg font-bold";
+        iconWrap.className = "w-10 h-10 rounded-full bg-indigo-100 text-indigo-600 flex items-center justify-center text-lg font-bold";
         icon.className = "fa-solid fa-info";
       }
 
@@ -820,8 +848,14 @@
         const contoh = masterSiswa[0];
         document.getElementById('login-siswa-nisn').value = contoh.nisn;
         document.getElementById('login-siswa-pass').value = contoh.password;
-        showModal("Akun Siswa Demo Terisi", `Nama: ${contoh.nama}\nNISN: ${contoh.nisn}\nPassword: ${contoh.password}\n\nSilakan klik tombol MASUK UJIAN SISWA.`, "success");
+        showModal("Akun Siswa Terisi", `Nama: ${contoh.nama}\nNISN: ${contoh.nisn}\nPassword: ${contoh.password}\n\nSilakan klik tombol MASUK KE RUANG UJIAN.`, "success");
       }
+    }
+
+    function isiAkunDemoOperator() {
+      document.getElementById('login-op-user').value = "Astroboy";
+      document.getElementById('login-op-pass').value = "MusiMah@kam$$";
+      showModal("Akun Operator Terisi", "Username: Astroboy\nPassword: MusiMah@kam$$\n\nSilakan klik MASUK PANEL PROKTOR.", "info");
     }
 
     function handleLoginSiswa(e) {
@@ -831,12 +865,12 @@
 
       const siswa = masterSiswa.find(s => s.nisn === nisnInput && s.password === passInput);
       if (!siswa) {
-        showModal("Gagal Masuk", "NISN atau Password tidak cocok. Klik tombol 'Isi Akun Demo' di bawah form untuk mencoba.", "error");
+        showModal("Gagal Masuk", "NISN atau Password kartu ujian tidak cocok!\nKlik tombol 'Auto-Fill Akun Demo Siswa' jika ingin mencoba langsung.", "error");
         return;
       }
 
       if (siswa.statusUjian === "Terblokir") {
-        showModal("Akun Terblokir", "Akun Anda terblokir. Silakan hubungi proktor ruang ujian.", "error");
+        showModal("Akun Terblokir", "Akun Anda terblokir. Silakan hubungi proktor ruang ujian Anda.", "error");
         return;
       }
 
@@ -864,11 +898,16 @@
       const userInput = document.getElementById('login-op-user').value.trim();
       const passInput = document.getElementById('login-op-pass').value.trim();
 
+      // Cocokkan dengan daftar akun operator
       let op = operatorAccounts.find(o => o.username.toLowerCase() === userInput.toLowerCase() && o.password === passInput);
-      if (!op && userInput === 'admin' && passInput === 'admin123') op = operatorAccounts[0];
+
+      // Support default Astroboy & MusiMah@kam$$
+      if (!op && userInput === 'Astroboy' && passInput === 'MusiMah@kam$$') {
+        op = operatorAccounts[0];
+      }
 
       if (!op) {
-        showModal("Gagal Masuk", "Akun Operator salah. Default: admin / admin123.", "error");
+        showModal("Gagal Masuk Operator", "Username atau Password operator salah!\nDefault Username: Astroboy\nDefault Password: MusiMah@kam$$", "error");
         return;
       }
 
@@ -960,7 +999,7 @@
     function mulaiUjianSiswa(mapelId) {
       const mapelObj = daftarJadwalMapel.find(m => m.id === mapelId);
       if (!mapelObj || !mapelObj.soalList || mapelObj.soalList.length === 0) {
-        showModal("Pemberitahuan", "Bank soal mapel ini belum siap.", "error");
+        showModal("Pemberitahuan", "Bank soal untuk mapel ini belum tersedia.", "error");
         return;
       }
 
@@ -1156,7 +1195,7 @@
         round++;
       }
 
-      // Susun meja berdampingan (kursi 1 & 2 beda tingkat)
+      // Susun meja berdampingan
       masterSiswa = [];
       let globalIdx = 1;
       ruangBuckets.forEach((bucket, rIdx) => {
@@ -1263,7 +1302,7 @@
     }
 
     // -------------------------------------------------------------
-    // RENDER CETAK KARTU E-KTP (10 KARTU PER LEMBAR A4)
+    // RENDER CETAK KARTU E-KTP (PRESISI 10 KARTU PER LEMBAR A4)
     // -------------------------------------------------------------
     function renderCetakKartu() {
       const container = document.getElementById('container-kartu-ujian');
@@ -1285,37 +1324,34 @@
         const batch = target.slice(l * 10, (l + 1) * 10);
 
         html += `
-          <div class="a4-print-sheet-kartu grid grid-cols-2 gap-2 bg-white ${l < totalLembar - 1 ? 'page-break-a4' : ''}">
+          <div class="a4-print-sheet-kartu ${l < totalLembar - 1 ? 'page-break-a4' : ''}">
         `;
 
         batch.forEach(s => {
           html += `
-            <div class="ektp-card bg-white border border-slate-700 rounded-lg p-2 flex flex-col justify-between text-[8px] leading-tight text-slate-900 shadow-sm relative overflow-hidden">
-              <!-- Watermark Garis E-KTP Tipis -->
-              <div class="absolute inset-0 bg-gradient-to-br from-indigo-50/40 via-transparent to-pink-50/40 pointer-events-none"></div>
-
-              <!-- Kop E-KTP Kartu Ujian -->
-              <div class="flex items-center justify-between border-b border-slate-700 pb-1 relative z-10">
-                <img src="${madrasahConfig.logoKemenagSrc}" alt="Kemenag" class="w-6 h-6 object-contain flex-shrink-0">
-                <div class="text-center px-1 flex-1">
-                  <h4 class="text-[7.5px] font-extrabold uppercase tracking-tight text-slate-800 leading-none">KEMENTERIAN AGAMA KABUPATEN LANDAK</h4>
-                  <h3 class="text-[8px] font-black uppercase text-indigo-900 leading-tight">MTS NEGERI LANDAK</h3>
-                  <p class="text-[6.5px] font-bold text-slate-600 tracking-wider">KARTU PESERTA ASESMEN / CBT</p>
+            <div class="ektp-card bg-white border border-slate-600 rounded-md p-1.5 flex flex-col justify-between text-[8px] leading-tight text-slate-900 shadow-sm relative">
+              <!-- Kop Kartu Ujian Presisi -->
+              <div class="flex items-center justify-between border-b border-slate-600 pb-1">
+                <img src="${madrasahConfig.logoKemenagSrc}" alt="Kemenag" class="w-5 h-5 object-contain flex-shrink-0">
+                <div class="text-center px-1 flex-1 leading-none">
+                  <h4 class="text-[7px] font-extrabold uppercase text-slate-800">KEMENAG KABUPATEN LANDAK</h4>
+                  <h3 class="text-[7.5px] font-black uppercase text-indigo-900">MTs NEGERI LANDAK</h3>
+                  <p class="text-[6.5px] font-bold text-slate-600">KARTU PESERTA ASESMEN / CBT</p>
                 </div>
-                <img src="${madrasahConfig.logoMadrasahSrc}" alt="MTsN" class="w-6 h-6 object-contain flex-shrink-0">
+                <img src="${madrasahConfig.logoMadrasahSrc}" alt="MTsN" class="w-5 h-5 object-contain flex-shrink-0">
               </div>
 
-              <!-- Biodata Siswa Ukuran E-KTP -->
-              <table class="w-full text-left border-collapse text-[8px] my-auto relative z-10">
+              <!-- Biodata Siswa E-KTP -->
+              <table class="w-full text-left border-collapse text-[7.5px] my-auto">
                 <tr>
-                  <td class="text-slate-500 font-semibold w-20 py-0.5">No. Peserta</td>
+                  <td class="text-slate-500 font-semibold w-16 py-0.5">No. Peserta</td>
                   <td class="w-1.5">:</td>
-                  <td class="font-mono font-bold text-slate-900">${s.noPeserta}</td>
+                  <td class="font-mono font-bold text-slate-900 truncate">${s.noPeserta}</td>
                 </tr>
                 <tr>
-                  <td class="text-slate-500 font-semibold py-0.5">Nama</td>
+                  <td class="text-slate-500 font-semibold py-0.5">Nama Siswa</td>
                   <td>:</td>
-                  <td class="font-black text-slate-900 truncate max-w-[130px]">${s.nama}</td>
+                  <td class="font-black text-slate-900 truncate max-w-[125px]">${s.nama}</td>
                 </tr>
                 <tr>
                   <td class="text-slate-500 font-semibold py-0.5">NISN (User)</td>
@@ -1330,16 +1366,16 @@
                 <tr>
                   <td class="text-slate-500 font-semibold py-0.5">Password</td>
                   <td>:</td>
-                  <td class="font-mono font-black text-rose-700 bg-amber-50 px-1 py-0.2 rounded w-fit tracking-wider">${s.password}</td>
+                  <td class="font-mono font-black text-rose-700 bg-amber-100 px-1 py-0.2 rounded w-fit">${s.password}</td>
                 </tr>
               </table>
 
-              <!-- Footer Tanda Tangan Ringkas -->
-              <div class="flex items-end justify-between border-t border-slate-600 pt-0.5 text-[6.5px] relative z-10">
+              <!-- Footer Tanda Tangan -->
+              <div class="flex items-end justify-between border-t border-slate-500 pt-0.5 text-[6.5px]">
                 <span class="text-slate-400 italic text-[6px]">*Wajib dibawa</span>
                 <div class="text-right leading-none">
-                  <p class="text-slate-600">Kepala Madrasah,</p>
-                  <p class="font-bold text-slate-900 underline mt-1">${madrasahConfig.namaKamad}</p>
+                  <p class="text-slate-600 text-[6px]">Kepala Madrasah,</p>
+                  <p class="font-bold text-slate-900 underline mt-0.5 text-[6.5px]">${madrasahConfig.namaKamad}</p>
                 </div>
               </div>
             </div>
@@ -1353,7 +1389,7 @@
     }
 
     // -------------------------------------------------------------
-    // RENDER DENAH MEJA RUANGAN (5 MEJA / BARIS, 1 MEJA = 2 SISWA)
+    // RENDER DENAH MEJA RUANGAN (PAS 1 LEMBAR A4 TANPA TERPOTONG)
     // -------------------------------------------------------------
     function renderDenahRuangan() {
       const container = document.getElementById('container-denah-ruangan');
@@ -1374,21 +1410,23 @@
       }
 
       let html = `
-        <div class="a4-print-sheet-denah flex flex-col justify-between bg-white text-slate-900 p-2 rounded-2xl">
-          <div class="text-center border-b-2 border-slate-800 pb-2 mb-2">
-            <h2 class="text-xs md:text-sm font-black uppercase tracking-wide text-slate-900">DENAH TEMPAT DUDUK PESERTA ASESMEN / CBT</h2>
-            <h3 class="text-xs font-extrabold uppercase text-indigo-900">MADRASAH TSANAWIYAH NEGERI LANDAK • ${ruangPilih}</h3>
-            <p class="text-[9px] text-slate-600 font-semibold">Kombinasi Silang Acak (Kelas 7, 8, dan 9) • Kapasitas: ${siswaRuang.length} Siswa (${totalMeja} Meja Ganda)</p>
+        <div class="a4-print-sheet-denah flex flex-col justify-between bg-white text-slate-900 p-3 rounded-2xl border border-slate-300">
+          <!-- Kop Denah Ringkas Presisi -->
+          <div class="text-center border-b-2 border-slate-800 pb-1.5 mb-1.5">
+            <h2 class="text-xs md:text-sm font-black uppercase tracking-wide text-slate-900 leading-tight">DENAH TEMPAT DUDUK PESERTA ASESMEN / CBT</h2>
+            <h3 class="text-xs font-extrabold uppercase text-indigo-900 leading-tight">MADRASAH TSANAWIYAH NEGERI LANDAK • ${ruangPilih}</h3>
+            <p class="text-[8.5px] text-slate-600 font-semibold mt-0.5">Kombinasi Silang Acak (Kelas 7, 8, dan 9) • Kapasitas: ${siswaRuang.length} Siswa (${totalMeja} Meja Ganda)</p>
           </div>
 
-          <div class="w-full max-w-sm mx-auto mb-2 bg-slate-100 border border-slate-400 rounded-lg py-1 text-center">
-            <span class="text-[8.5px] font-black uppercase tracking-wider text-slate-700">
-              <i class="fa-solid fa-chalkboard mr-1 text-indigo-700"></i> PAPAN TULIS / MEJA PENGAWAS (BAGIAN DEPAN)
+          <!-- Indikator Papan Tulis / Depan -->
+          <div class="w-full max-w-xs mx-auto mb-1.5 bg-slate-100 border border-slate-400 rounded py-0.5 text-center">
+            <span class="text-[8px] font-black uppercase tracking-wider text-slate-700">
+              <i class="fa-solid fa-chalkboard mr-1 text-indigo-700"></i> PAPAN TULIS / MEJA PENGAWAS (DEPAN)
             </span>
           </div>
 
-          <!-- Formasi 5 Meja per Baris -->
-          <div class="grid grid-cols-5 gap-2 w-full my-auto">
+          <!-- Formasi 5 Meja per Baris (Tinggi Kompak Pas 1 Lembar A4) -->
+          <div class="grid grid-cols-5 gap-1.5 w-full my-auto">
       `;
 
       daftarMeja.forEach(meja => {
@@ -1396,33 +1434,33 @@
         const sn = meja.siswaKanan;
 
         html += `
-          <div class="border-2 border-slate-700 rounded-lg p-1.5 flex flex-col justify-between text-[8px] min-h-[88px] bg-slate-50/50">
-            <div class="bg-indigo-900 text-white font-mono font-bold text-center rounded text-[7.5px] py-0.5 mb-1 tracking-wider">
+          <div class="border border-slate-700 rounded-md p-1 flex flex-col justify-between text-[7.5px] min-h-[58px] bg-slate-50/70">
+            <div class="bg-indigo-900 text-white font-mono font-bold text-center rounded text-[7px] py-0.5 mb-1 tracking-wider leading-none">
               MEJA ${meja.nomorMeja}
             </div>
 
             <div class="grid grid-cols-2 gap-1 flex-1">
               <!-- Kursi 1 (Kiri) -->
-              <div class="bg-white border border-slate-300 rounded p-1 flex flex-col justify-between">
+              <div class="bg-white border border-slate-300 rounded p-0.5 flex flex-col justify-between">
                 <div>
-                  <span class="text-[6px] font-black text-indigo-700 bg-indigo-50 px-1 rounded block">K-1</span>
-                  <p class="font-bold text-slate-900 truncate mt-0.5" title="${sk ? sk.nama : '-'}">${sk ? sk.nama : '<span class="text-slate-300">Kosong</span>'}</p>
+                  <span class="text-[5.5px] font-black text-indigo-700 bg-indigo-50 px-1 rounded block leading-none">K-1</span>
+                  <p class="font-bold text-slate-900 truncate mt-0.5 text-[7px] leading-tight" title="${sk ? sk.nama : '-'}">${sk ? sk.nama : '<span class="text-slate-300">Kosong</span>'}</p>
                 </div>
-                <div class="mt-0.5">
-                  <p class="font-mono text-[6.5px] text-slate-500 truncate">${sk ? sk.noPeserta : '-'}</p>
-                  <span class="inline-block text-[6.5px] font-bold text-slate-800 bg-slate-200 px-1 rounded">${sk ? 'Kls ' + sk.kelas : '-'}</span>
+                <div class="mt-0.5 leading-none">
+                  <p class="font-mono text-[6px] text-slate-500 truncate">${sk ? sk.noPeserta : '-'}</p>
+                  <span class="inline-block text-[6px] font-bold text-slate-800 bg-slate-200 px-1 rounded">${sk ? 'Kls ' + sk.kelas : '-'}</span>
                 </div>
               </div>
 
               <!-- Kursi 2 (Kanan) -->
-              <div class="bg-white border border-slate-300 rounded p-1 flex flex-col justify-between">
+              <div class="bg-white border border-slate-300 rounded p-0.5 flex flex-col justify-between">
                 <div>
-                  <span class="text-[6px] font-black text-pink-700 bg-pink-50 px-1 rounded block">K-2</span>
-                  <p class="font-bold text-slate-900 truncate mt-0.5" title="${sn ? sn.nama : '-'}">${sn ? sn.nama : '<span class="text-slate-300">Kosong</span>'}</p>
+                  <span class="text-[5.5px] font-black text-pink-700 bg-pink-50 px-1 rounded block leading-none">K-2</span>
+                  <p class="font-bold text-slate-900 truncate mt-0.5 text-[7px] leading-tight" title="${sn ? sn.nama : '-'}">${sn ? sn.nama : '<span class="text-slate-300">Kosong</span>'}</p>
                 </div>
-                <div class="mt-0.5">
-                  <p class="font-mono text-[6.5px] text-slate-500 truncate">${sn ? sn.noPeserta : '-'}</p>
-                  <span class="inline-block text-[6.5px] font-bold text-slate-800 bg-slate-200 px-1 rounded">${sn ? 'Kls ' + sn.kelas : '-'}</span>
+                <div class="mt-0.5 leading-none">
+                  <p class="font-mono text-[6px] text-slate-500 truncate">${sn ? sn.noPeserta : '-'}</p>
+                  <span class="inline-block text-[6px] font-bold text-slate-800 bg-slate-200 px-1 rounded">${sn ? 'Kls ' + sn.kelas : '-'}</span>
                 </div>
               </div>
             </div>
@@ -1435,8 +1473,8 @@
       if (sisaKolom < 5) {
         for (let k = 0; k < sisaKolom; k++) {
           html += `
-            <div class="border border-dashed border-slate-300 rounded-lg p-1.5 flex items-center justify-center min-h-[88px] bg-slate-100/50">
-              <span class="text-[7px] text-slate-400 font-mono italic">Kosong</span>
+            <div class="border border-dashed border-slate-300 rounded-md p-1 flex items-center justify-center min-h-[58px] bg-slate-50/30">
+              <span class="text-[6.5px] text-slate-400 font-mono italic">Kosong</span>
             </div>
           `;
         }
@@ -1445,10 +1483,11 @@
       html += `
           </div>
 
-          <div class="flex items-center justify-between border-t border-slate-400 pt-2 mt-2 text-[8px] text-slate-600">
+          <!-- Catatan Kaki Denah Kompak -->
+          <div class="flex items-center justify-between border-t border-slate-400 pt-1.5 mt-1 text-[7.5px] text-slate-600 leading-tight">
             <div>
-              <p><i class="fa-solid fa-circle-info text-indigo-700 mr-1"></i> Penataan meja disilang otomatis (Kelas 7, 8, dan 9 tidak sebangku).</p>
-              <p>Formasi: <b>5 Meja per Baris</b> • <b>1 Meja = 2 Siswa</b>.</p>
+              <p><i class="fa-solid fa-circle-info text-indigo-700 mr-1"></i> Penataan disilang otomatis (Kelas 7, 8, dan 9 tidak sebangku).</p>
+              <p>Formasi: <b>5 Meja per Baris</b> • <b>1 Meja = 2 Siswa Beda Kelas</b>.</p>
             </div>
             <div class="text-right">
               <p>Pengawas Ruang Ujian: ______________________</p>
@@ -1495,8 +1534,8 @@
 
       if (terblokir.length === 0) {
         listEl.innerHTML = `
-          <div class="p-3.5 bg-emerald-50 text-emerald-800 rounded-xl text-xs font-semibold flex items-center gap-2 border border-emerald-200">
-            <i class="fa-solid fa-circle-check text-[#0b6b47]"></i> Tidak ada peserta yang terblokir.
+          <div class="p-3.5 bg-emerald-500/10 text-emerald-300 rounded-2xl text-xs font-semibold flex items-center gap-2 border border-emerald-500/30">
+            <i class="fa-solid fa-circle-check text-emerald-400"></i> Tidak ada peserta yang terblokir saat ini.
           </div>
         `;
         return;
@@ -1505,9 +1544,9 @@
       let html = '';
       terblokir.forEach(s => {
         html += `
-          <div class="p-3 bg-rose-50 border border-rose-200 rounded-xl flex items-center justify-between text-xs">
-            <span class="font-bold text-rose-800">${s.nama} (${s.nisn}) - ${s.ruang}</span>
-            <button onclick="bukaBlokir('${s.nisn}')" class="px-3 py-1 bg-[#0b6b47] text-white rounded-lg font-bold">Buka Blokir</button>
+          <div class="p-3 bg-rose-500/10 border border-rose-500/30 rounded-2xl flex items-center justify-between text-xs text-rose-300">
+            <span class="font-bold">${s.nama} (${s.nisn}) - ${s.ruang}</span>
+            <button onclick="bukaBlokir('${s.nisn}')" class="px-3 py-1 bg-emerald-600 hover:bg-emerald-500 text-white rounded-xl font-bold transition">Buka Blokir</button>
           </div>
         `;
       });
@@ -1652,7 +1691,7 @@
       }
     }
 
-    // Startup
+    // Inisialisasi awal saat halaman dibuka
     window.onload = function() {
       initContohBankSoalSemuaMapel();
       generateSample550Siswa();
